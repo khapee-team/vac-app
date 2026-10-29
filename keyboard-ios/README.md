@@ -18,39 +18,25 @@ A custom iOS keyboard that shows 4 AI suggestion chips above every keyboard in e
 
 ## Build Steps
 
-### 1. Open Xcode and create a new project
+### 1. Open the project
 
-1. Open Xcode → New Project → iOS → App
-2. Name: `VACKeyboard`, Bundle ID: `com.yourname.VACKeyboard`
-3. Language: Swift, Interface: Storyboard
+The Xcode project is already set up in this folder: open `VACKeyboard.xcodeproj`. It has two targets,
+the `VACKeyboard` app (sources in `VACKeyboard/`) and the `VACKeyboardExt` keyboard extension
+(sources in `VACKeyboardExt/`). If you change `project.yml`, regenerate the project with
+[XcodeGen](https://github.com/yonaskolb/XcodeGen): `xcodegen generate`.
 
-### 2. Add a Keyboard Extension target
-
-1. File → New → Target → Custom Keyboard Extension
-2. Name: `VACKeyboardExt`
-3. Bundle ID: `com.yourname.VACKeyboard.KeyboardExt`
-
-### 3. Copy the Swift files
-
-Copy all `.swift` files from this folder into the `VACKeyboardExt` target:
-- `KeyboardViewController.swift`
-- `VACClient.swift`
-- `VACConfig.swift`
-
-Replace the generated `KeyboardViewController.swift` with the one in this folder.
-
-### 4. Configure App Groups (for config sharing)
+### 2. Configure App Groups (for config sharing)
 
 Both the main app and keyboard extension need the same App Group:
 
 1. Select the main app target → Signing & Capabilities → + Capability → App Groups
 2. Add group: `group.com.yourname.vackeyboard`
 3. Repeat for the `VACKeyboardExt` target
-4. In `VACConfig.swift`, update `suiteName` to match
+4. In `VACKeyboard/VACConfig.swift` and `VACKeyboardExt/VACConfig.swift`, update `suiteName` to match
 
-### 5. Set the server URL
+### 3. Set the server URL
 
-Open `VACConfig.swift` and change the default URL to your Mac's local IP:
+Open `VACKeyboardExt/VACConfig.swift` (and the copy in `VACKeyboard/`) and change the default URL to your Mac's local IP:
 
 ```swift
 var serverURL: String {
@@ -59,7 +45,7 @@ var serverURL: String {
 
 Your Mac IP is shown in the VAC app → Settings → Phone & Extension section.
 
-### 6. Allow HTTP (local network)
+### 4. Allow HTTP (local network)
 
 In the main app's `Info.plist`, add:
 
@@ -73,21 +59,21 @@ In the main app's `Info.plist`, add:
 
 And add `NSLocalNetworkUsageDescription` with reason: "VAC needs local network access to connect to your Mac."
 
-### 7. Build and run on device
+### 5. Build and run on device
 
 1. Connect your iPhone
 2. Select your device as the build target
 3. ⌘R to build and run
 4. Trust the developer certificate on device: Settings → General → VPN & Device Management
 
-### 8. Enable the keyboard on iPhone
+### 6. Enable the keyboard on iPhone
 
 1. Settings → General → Keyboard → Keyboards → Add New Keyboard
 2. Select **VACKeyboard**
 3. Enable "Allow Full Access" (required for network requests)
 4. Done ✓
 
-### 9. Use VAC keyboard
+### 7. Use VAC keyboard
 
 In any app:
 1. Tap any text field

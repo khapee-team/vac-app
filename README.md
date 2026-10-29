@@ -1,8 +1,76 @@
-# VAC
+# Vāc
+
+**What it is:** an assistant for busy WhatsApp group chats. It reads a chat you import (or follow
+live) and pulls out the deadlines, promises and follow-ups buried in it, so nothing gets lost
+under a hundred messages. It also suggests replies and helps with tone as you type.
+
+**Who it's for:** students in school and class group chats, and anyone else whose commitments
+live in WhatsApp threads.
+
+**Status:** working prototype in active development. It runs on your own computer; there is no
+hosted version.
+
+**Live site:** none yet.
+
+**License:** All rights reserved (see [LICENSE](LICENSE)).
+
+**Run it:**
+
+```bash
+npm install
+cp .env.example .env   # optional: add an AI key, see below
+npm run dev
+```
+
+This opens the app at `http://127.0.0.1:5174/` (or the next free port) with the local API on
+`http://127.0.0.1:8787/`. Without an AI key, Vāc uses a local Ollama model if one is running,
+and otherwise falls back to rule-based extraction. Details are in
+[Running The Project](#running-the-project).
+
+## Team
+
+Vāc was co-founded and built by two collaborators:
+
+- *Siya Agrawal* (@siyaAgrawal), Co-founder: [role, to be filled in by Siya]
+- *Shaurya Gupta* (@shauryagupta11890-spec), Co-founder: [role, to be filled in by Shaurya]
+
+## Privacy and consent
+
+Vāc processes WhatsApp chat exports, which contain other people's messages. It should only be
+used on chats where every member has agreed to it.
+
+What happens to chat data, as the code works today:
+
+- **Where it is processed.** Imported exports are parsed by the local server on your own
+  computer. Whether message text leaves your computer depends on how you set Vāc up:
+  - With an **Anthropic API key**, chat text is sent to Anthropic's API for analysis and reply
+    suggestions. With an **OpenAI key** set, text can also go to OpenAI for commitment
+    extraction. The Tone Lab can call Anthropic straight from the browser if a `VITE_` key is set.
+  - With **Ollama** running locally and no cloud key, the AI runs on your own computer and
+    nothing is sent out.
+  - With **no AI configured**, extraction uses local rules only.
+  - The **iOS keyboard** sends what you type to the Vāc server on your computer over Wi-Fi, or
+    straight to Anthropic's API if you give it a key. The **browser extension** sends text from
+    compose boxes to the local server only.
+- **What is stored, and for how long.** Imported chats, commitments and tone history are kept in
+  your browser's local storage until you delete them in the app. The live WhatsApp bridge keeps
+  its login session, the last 200 messages of each chat it follows, reply records and keyboard
+  learning data in the `data/` folder on your computer, plus a log that includes the first 60
+  characters of messages it sends. **None of this is deleted automatically**; delete the
+  `data/` folder to remove it. Vāc runs no server of its own.
+- **Auto-reply.** The live bridge has an auto-reply mode that can send messages for you. It is
+  off by default.
+- **Network exposure.** The local API listens on all network interfaces so a phone can reach
+  it, which means other devices on the same Wi-Fi can reach it too. Use it on networks you trust.
+
+No chat data is included in this repository, and test data must be anonymised. Users should
+delete exports after use.
+
+## About this codebase
 
 VAC is an AI-assisted communication workspace focused on WhatsApp conversations. Its primary product direction is now keyboard-first: VAC is meant to behave like an intelligent communication layer embedded directly into replying and typing, not just a dashboard or analytics tool. It helps a user import or live-connect chats, inspect message history, extract commitments, analyze tone, reason about relationship dynamics, and generate reply suggestions or auto-replies.
 
-## Product Reset
+### Product Reset
 
 The repository is currently being re-architected from a WhatsApp-first analysis tool into a universal communication operating system.
 

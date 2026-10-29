@@ -52,3 +52,15 @@ Thumbs.db
 # Temp / local runtime
 /tmp/
 public/qr.png
+
+# Xcode per-user state
+xcuserdata/
+
+# Local Claude launch settings
+.claude/launch.json
+
+# Never commit real chats or exports
+*.chat.txt
+WhatsApp Chat*.txt
+_chat.txt
+data/logs/
