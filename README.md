@@ -31,8 +31,10 @@ and otherwise falls back to rule-based extraction. Details are in
 
 Vāc was co-founded and built by two collaborators:
 
-- *Siya Agrawal* (@siyaAgrawal), Co-founder: [role, to be filled in by Siya]
-- *Shaurya Gupta* (@shauryagupta11890-spec), Co-founder: Product and design lead
+- *Siya Agrawal* (@siyaAgrawal), Co-founder
+- *Shaurya Gupta* (@shauryagupta11890-spec), Co-founder
+
+Siya and Shaurya worked together on Vāc at every stage, from research and product design to code.
 
 ## Privacy and consent
 
